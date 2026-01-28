@@ -5,30 +5,27 @@ import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 
 const Details = () => {
-  const data = useLoaderData();
-  const service = data.result
-  console.log(service)
   const navigate = useNavigate();
-  // const { id } = useParams();
-  // const [model, setModel] = useState({});
-  // const [loading, setLoading] = useState(true);
-  // const { user } = use(AuthContext);
+  const { id } = useParams();
+  const [details, setDetails] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { user } = use(AuthContext);
   // const [refetch, setRefecth] = useState(false)
 
-  // useEffect(() => {
-  //   fetch(`https://3d-model-server.vercel.app/models/${id}`, {
-  //     headers: {
-  //       authorization: `Bearer ${user.accessToken}`,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setModel(data.result);
-  //       console.log(" Api called!")
-  //       console.log(data);
-  //       setLoading(false);
-  //     });
-  // }, [user, id, refetch]);
+  useEffect(() => {
+    fetch(`http://localhost:3000/providers/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setDetails(data.result);
+        // console.log(" Api called!")
+        console.log(data);
+        setLoading(false);
+      });
+  }, [user, id]); //= [user, id, refetch]
 
   const handleDelete = () => {
     Swal.fire({
@@ -41,7 +38,7 @@ const Details = () => {
       confirmButtonText: "Yes, remove it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/providers/${service._id}`, {
+        fetch(`http://localhost:3000/providers/${details._id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -65,54 +62,48 @@ const Details = () => {
     });
   };
 
-  // const handleDownload = () => {
-  //   const finalModel = {
-  //     name: model.name,
-  //     downloads: model.downloads,
-  //     created_by: model.created_by,
-  //     description: model.description,
-  //     thumbnail: model.thumbnail,
-  //     created_at: new Date(),
-  //     downloaded_by: user.email,
-  //   };
+  const handleBookings = () => {
+    const bookingInfo = {
+      name: details.provider_name,
+      price: details.price,
+      created_by: details.email,
+      description: details.description,
+      image_url: details.image_url,
+      created_at: new Date(),
+      booked_by: user.email,
+    };
 
-  //   fetch(`https://3d-model-server.vercel.app/downloads/${model._id}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(finalModel),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       toast.success("Successfully downloaded!");
-  //       setRefecth(!refetch)
+    fetch(`http://localhost:3000/bookings/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookingInfo }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("You Booked Our Service!");
+        navigate("/my-bookings");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  //       // alternative solution of realtime download count update
-
-  //   //     fetch(`https://3d-model-server.vercel.app/models/${id}`, {
-  //   //   headers: {
-  //   //     authorization: `Bearer ${user.accessToken}`,
-  //   //   },
-  //   // })
-  //   //   .then((res) => res.json())
-  //   //   .then((data) => {
-  //   //     setModel(data.result);
-  //   //     console.log(" Api called!")
-  //   //     console.log(data);
-  //   //     setLoading(false);
-  //   //   });
-
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // if (loading) {
-  //   return <div> Loading...</div>;
-  // }
+  if (loading) {
+    return (
+      <div>
+        <section className="dots-container">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8">
@@ -120,7 +111,7 @@ const Details = () => {
         <div className="flex flex-col md:flex-row gap-8 p-6 md:p-8">
           <div className="shrink-0 w-full md:w-1/2">
             <img
-              src={service.image_url}
+              src={details.image_url}
               alt=""
               className="w-full object-cover rounded-xl shadow-md"
             />
@@ -128,39 +119,45 @@ const Details = () => {
 
           <div className="flex flex-col justify-center space-y-4 w-full md:w-1/2">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-              {service.service_name}
+              {details.provider_name}
             </h1>
 
             <div className="flex gap-3">
               <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
-                {service.category}
+                {details.category}
               </div>
 
-              <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
+              {/* <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
                 Saved
-              </div>
+              </div> */}
             </div>
 
             <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-              {service.description}
+              {details.description}
+            </p>
+            <p className="text-gray-600 leading-relaxed text-base md:text-lg">
+              Charge: {details.price} USD
+            </p>
+            <p className="text-gray-600 leading-relaxed text-base md:text-lg">
+              Contact: {details.email}
             </p>
 
             <div className="flex gap-3 mt-6">
               <Link
-                to={`/update-service/${service._id}`}
-                className="btn btn-primary rounded-full bg-linear-to-r from-pink-500 to-red-600 text-white border-0 hover:from-pink-600 hover:to-red-700"
+                to={`/update-service/${details._id}`}
+                className="rounded-full button text-white btn"
               >
                 Update Service
               </Link>
               <button
-                // onClick={handleDownload}
-                className="btn btn-secondary rounded-full"
+                onClick={handleBookings}
+                className="btn button rounded-full"
               >
-                Book
+                Book Now
               </button>
               <button
                 onClick={handleDelete}
-                className="btn btn-outline rounded-full border-gray-300 hover:border-pink-500 hover:text-pink-600"
+                className="btn bg-white btn-outline rounded-full border-gray-300 hover:border-blue-500 hover:text-blue-600"
               >
                 Remove
               </button>
@@ -168,6 +165,13 @@ const Details = () => {
           </div>
         </div>
       </div>
+
+      <Link
+        to="/all-services"
+        className="button rounded-full mt-10 mb-20 p-4 text-white w-full btn-sm"
+      >
+        Back to Services
+      </Link>
     </div>
   );
 };

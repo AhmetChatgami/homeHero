@@ -9,11 +9,11 @@ const AllServices = () => {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    const search_text = e.target.search.value
-    console.log(search_text)
+    const searchText = e.target.search.value
+    console.log(searchText)
     setLoading(true)
 
-    fetch(`http://localhost:3000/${search_text}`)
+    fetch(`http://localhost:3000/search?search=${searchText}`)
     .then(res=> res.json())
     .then(data=> {
       console.log(data)

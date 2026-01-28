@@ -122,14 +122,14 @@ const NavBar = () => {
               </li>
 
               <li>
-                <Link to={"/my-models"}>
-                  My Models
+                <Link to={"/my-services"}>
+                  My Services
                 </Link>
               </li>
 
               <li >
-                <Link to={"/my-downloads"}>
-                 My Downloads
+                <Link to={"/my-bookings"}>
+                 My Bookings
                 </Link>
               </li>
 

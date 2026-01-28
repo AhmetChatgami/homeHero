@@ -7,17 +7,20 @@ import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Registration";
 import PrivateRoute from "./PrivateRoute";
 
-import MyDownloads from "../Pages/MyDownloads/MyDownloads";
 import AllServices from "../Pages/AllServices/AllServices";
 import AddService from "../Pages/AddSerivce/AddService";
 import MyServices from "../Pages/MyServices/MyServices";
 import UpdateService from "../Pages/Update/UpdateService";
 import Details from "../Pages/Details/Details";
+import MyBookings from "../Pages/MyBookings/MyBookings";
+import ErrorPage from "../components/ErrorPage";
+import Why from "../Pages/why/Why";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage/>,
     children: [
       {
         path: "/",
@@ -52,8 +55,7 @@ export const router = createBrowserRouter([
             <Details />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/providers/${params.id}`),
+    
       },
 
       {
@@ -66,10 +68,10 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/my-downloads",
+        path: "/my-bookings",
         element: (
           <PrivateRoute>
-            <MyDownloads />
+            <MyBookings />
           </PrivateRoute>
         ),
       },
@@ -92,6 +94,10 @@ export const router = createBrowserRouter([
         path: "/auth/register",
         element: <Register />,
       },
+      {
+        path: "/why",
+        element: <Why />,
+      }
     ],
   },
 ]);

@@ -21,7 +21,7 @@ export const ServiceCard = ({service}) => {
 image_url, category, description, _id, service_name} = service || {
 
 }
-console.log(service)
+// console.log(service)
 
   return (
     <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">

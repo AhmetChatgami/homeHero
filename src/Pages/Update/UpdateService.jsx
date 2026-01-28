@@ -1,15 +1,18 @@
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-
 
 const UpdateService = () => {
   const data = useLoaderData();
-  const service = data.result;
+  const service = data?.result || data;
+  const navigate = useNavigate();
 
+  // Update form submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    if (!service?._id) {
+      return toast.error("Something Went Wrong!");
+    }
     const formData = {
       name: e.target.name.value,
       category: e.target.category.value,
@@ -28,12 +31,12 @@ const UpdateService = () => {
       .then((data) => {
         console.log(data);
         toast.success("Successfully updated!");
+        navigate("/all-services");
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
 
   return (
     <div className="card bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
@@ -45,7 +48,7 @@ const UpdateService = () => {
             <label className="label font-medium">Name</label>
             <input
               type="text"
-              defaultValue={service?.service_name}
+              defaultValue={service?.provider_name}
               name="name"
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
@@ -65,10 +68,14 @@ const UpdateService = () => {
               <option value="" disabled>
                 Select category
               </option>
-                <option value="Wellness">Wellness</option>
+              <option value="Wellness">Wellness</option>
               <option value="Pet Care">Pet Care</option>
               <option value="Education">Education</option>
+              <option value="Beauty">Beauty</option>
+              <option value="Photographer">Photographer</option>
+              <option value="Tanslator">Translator</option>
               <option value="Catering">Catering</option>
+              <option value="Musician">Musician</option>
               <option value="Tech Repair">Tech Repair</option>
               <option value="Home Maintenance">Home Maintenance</option>
               <option value="Automotive">Automotive</option>
@@ -104,7 +111,6 @@ const UpdateService = () => {
 
           {/* Submit Button */}
           <button
-       
             type="submit"
             className="btn w-full text-white mt-6 rounded-full bg-linear-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
           >
