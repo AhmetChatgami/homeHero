@@ -9,7 +9,7 @@ const MyBookings = () => {
   const { user } = use(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-bookings?email=${user.email}`, {
+    fetch(`https://home-hero-server-liard.vercel.app/my-bookings?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },

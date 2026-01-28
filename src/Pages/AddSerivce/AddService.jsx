@@ -23,7 +23,7 @@ const AddService = () => {
     console.log(formData);
 
 
-     fetch('http://localhost:3000/providers',{
+     fetch('https://home-hero-server-liard.vercel.app/providers',{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const AddService = () => {
     .catch(err => {
       console.log(err)
     })
-    // fetch('http://localhost:3000/', {
+    // fetch('https://home-hero-server-liard.vercel.app/', {
     //   method: "POST",
     //   headers: {
     //     "Content-Type": "application/json",

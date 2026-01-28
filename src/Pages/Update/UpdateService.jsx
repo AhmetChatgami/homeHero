@@ -7,7 +7,7 @@ const UpdateService = () => {
   const service = data?.result || data;
   const navigate = useNavigate();
 
-  // Update form submit handler
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!service?._id) {
@@ -20,7 +20,7 @@ const UpdateService = () => {
       image_url: e.target.image_url.value,
     };
 
-    fetch(`http://localhost:3000/providers/${service._id}`, {
+    fetch(`https://home-hero-server-liard.vercel.app/providers/${service._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

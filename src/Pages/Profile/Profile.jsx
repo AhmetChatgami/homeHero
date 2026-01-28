@@ -2,7 +2,7 @@
 const Profile = () => {
     return (
         <div>
-            Profile
+            Kichu Bolte Mon chachce na ekhon. Ajke amar mon bhalo nei...
         </div>
     );
 };

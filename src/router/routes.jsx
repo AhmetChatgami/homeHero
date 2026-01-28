@@ -25,12 +25,12 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:3000/latest"),
+        loader: () => fetch("https://home-hero-server-liard.vercel.app/latest"),
       },
       {
         path: "/all-services",
         element: <AllServices />,
-        loader: () => fetch("http://localhost:3000/providers"),
+        loader: () => fetch("https://home-hero-server-liard.vercel.app/providers"),
       },
       {
         path: "/profile",
@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/providers/${params.id}`),
+          fetch(`https://home-hero-server-liard.vercel.app/providers/${params.id}`),
       },
       {
         path: "/auth/login",

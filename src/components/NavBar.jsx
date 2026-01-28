@@ -3,7 +3,7 @@ import { IoLogoModelS } from "react-icons/io";
 import { GoHomeFill } from "react-icons/go";
 import { IoLogIn, IoLogOut } from "react-icons/io5";
 import { FaGear, FaUser } from "react-icons/fa6";
-
+import logo from "../assets/Home Hero.png"
 import { ImBoxAdd } from "react-icons/im";
 import { use, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -61,7 +61,7 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-        <Link to={"/"} className="flex items-center gap-1 text-xl font-bold">
+        <Link to={"/"} className="flex items-center gap-1 text-xl font-bold"> <img className="size-20 rounded-full" src={logo} alt="" />
            HomeHero
         </Link>
       </div>

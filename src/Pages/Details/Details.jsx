@@ -13,7 +13,7 @@ const Details = () => {
   // const [refetch, setRefecth] = useState(false)
 
   useEffect(() => {
-    fetch(`http://localhost:3000/providers/${id}`, {
+    fetch(`https://home-hero-server-liard.vercel.app/providers/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -38,7 +38,7 @@ const Details = () => {
       confirmButtonText: "Yes, remove it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/providers/${details._id}`, {
+        fetch(`https://home-hero-server-liard.vercel.app/providers/${details._id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const Details = () => {
       booked_by: user.email,
     };
 
-    fetch(`http://localhost:3000/bookings/`, {
+    fetch(`https://home-hero-server-liard.vercel.app/bookings/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

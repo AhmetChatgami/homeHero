@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { LuRotate3D } from 'react-icons/lu';
 import { RiTwitterXLine } from 'react-icons/ri';
+import logo from "../assets/Home Hero.png"
 
 
 const Footer = () => {
@@ -19,8 +20,7 @@ const Footer = () => {
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
         <div>
           <div className="flex items-center space-x-2 text-white">
-         <LuRotate3D size={25}/>
-      <span className="text-xl font-bold text-gray-800 dark:text-gray-200">Home Hero</span>
+              <span className="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2"> <img className="size-15 rounded-full" src={logo} alt="" />Home Hero</span>
     </div>
           <ul className="space-y-2 mt-4">
             <li><Link to="/all-services" className="text-gray-600 dark:text-gray-200 hover:text-blue-600">All Services</Link></li>

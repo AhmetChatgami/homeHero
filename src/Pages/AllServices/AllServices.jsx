@@ -13,7 +13,7 @@ const AllServices = () => {
     console.log(searchText)
     setLoading(true)
 
-    fetch(`http://localhost:3000/search?search=${searchText}`)
+    fetch(`https://home-hero-server-liard.vercel.app/search?search=${searchText}`)
     .then(res=> res.json())
     .then(data=> {
       console.log(data)
