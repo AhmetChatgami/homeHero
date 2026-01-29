@@ -42,10 +42,25 @@ const MyBookings = () => {
     <div>
       <div className="">
         {/* <p>{details.length} bookings found</p> */}
-        {details.map((detail) => (
-          <BookingsCard key={detail._id} service={detail} />
+         <div className="overflow-hidden">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>SL No.</th>
+              <th>Name</th>
+              <th>Contact</th>
+              <th>Price</th>
+              <th></th>
+            </tr>
+          </thead>
+
+        </table>
+        {details.map((detail, index) => (
+          <BookingsCard key={detail._id} service={detail} index={index + 1} />
           
         ))}
+      </div>
         
              </div>
     </div>

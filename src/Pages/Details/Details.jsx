@@ -73,7 +73,7 @@ const Details = () => {
       booked_by: user.email,
     };
 
-    fetch(`https://home-hero-server-liard.vercel.app/bookings/`, {
+    fetch(`https://home-hero-server-liard.vercel.app/my-bookings/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

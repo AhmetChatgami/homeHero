@@ -11,11 +11,11 @@ image_url, category, price, _id, service_name} = service || {
 // console.log(service)
 
   return (
-    
+    <div>
     <div className="overflow-hidden">
           <table className="table">
             {/* head */}
-            <thead>
+            {/* <thead>
               <tr>
                 <th>
                   SL No.
@@ -25,7 +25,7 @@ image_url, category, price, _id, service_name} = service || {
                 <th>Price</th>
                 <th></th>
               </tr>
-            </thead>
+            </thead> */}
             <tbody>
               {/* row 1 */}
               <tr>
@@ -65,6 +65,7 @@ image_url, category, price, _id, service_name} = service || {
             {/* foot */}
             
           </table>
+        </div>
         </div>
   );
 };
