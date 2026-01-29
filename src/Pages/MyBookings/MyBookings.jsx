@@ -12,6 +12,7 @@ const MyBookings = () => {
     fetch(`https://home-hero-server-liard.vercel.app/my-bookings?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
+        // "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())

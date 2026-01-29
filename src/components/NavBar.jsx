@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router";
 import { IoLogoModelS } from "react-icons/io";
 import { GoHomeFill } from "react-icons/go";
 import { IoLogIn, IoLogOut } from "react-icons/io5";
-import { FaGear, FaUser } from "react-icons/fa6";
+import { FaBook, FaBookmark, FaGear, FaUser } from "react-icons/fa6";
 import logo from "../assets/Home Hero.png";
 import { ImBoxAdd } from "react-icons/im";
 import { use, useEffect, useState } from "react";
@@ -91,6 +91,9 @@ const NavBar = () => {
               <ImBoxAdd /> Add Service
             </NavLink>
           </li>
+           <li>
+            <NavLink to={"/my-bookings"}><FaBookmark /> My Bookings</NavLink>
+          </li>
           {/* 
           <li>
             <NavLink to={"/profile"}>
@@ -156,7 +159,7 @@ const NavBar = () => {
               <li>
                 <button
                   onClick={handleSignOut}
-                  className="btn btn-xs text-left bg-linear-to-r from-pink-500 to-red-500 text-white"
+                  className="btn btn-xs text-left bg-linear-to-r from-blue-500 to-gray-700 text-white"
                 >
                   <IoLogOut /> Logout
                 </button>
@@ -166,7 +169,7 @@ const NavBar = () => {
         ) : (
           <Link
             to={"/auth/login"}
-            className="btn rounded-full border-gray-300  btn-sm bg-linear-to-r from-pink-500 to-red-500 text-white"
+            className="btn rounded-full border-gray-300  btn-sm bg-linear-to-r from-blue-500 to-gray-800 text-white"
           >
             {" "}
             <IoLogIn /> Login

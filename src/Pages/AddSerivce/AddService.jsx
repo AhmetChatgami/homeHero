@@ -101,6 +101,7 @@ const AddService = () => {
               <option value="Catering">Catering</option>
               <option value="Tech Repair">Tech Repair</option>
               <option value="Home Maintenance">Home Maintenance</option>
+              <option value="Plumber">Plumber</option>
               <option value="Automotive">Automotive</option>
               <option value="Other">Other</option>
             </select>
