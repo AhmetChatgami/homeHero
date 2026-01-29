@@ -1,6 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ServiceCard } from "../../components/ServiceCard";
+import { BookingsCard } from "../../components/BookingsCard";
 
 const MyBookings = () => {
   // const { id } = useParams();
@@ -12,7 +13,7 @@ const MyBookings = () => {
     fetch(`https://home-hero-server-liard.vercel.app/my-bookings?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
-        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
@@ -39,11 +40,14 @@ const MyBookings = () => {
 //  console.log(details)
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="">
+        {/* <p>{details.length} bookings found</p> */}
         {details.map((detail) => (
-          <ServiceCard key={detail._id} service={detail} />
+          <BookingsCard key={detail._id} service={detail} />
+          
         ))}
-      </div>
+        
+             </div>
     </div>
   );
 };
