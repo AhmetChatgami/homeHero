@@ -3,26 +3,34 @@ import { IoLogoModelS } from "react-icons/io";
 import { GoHomeFill } from "react-icons/go";
 import { IoLogIn, IoLogOut } from "react-icons/io5";
 import { FaGear, FaUser } from "react-icons/fa6";
-import logo from "../assets/Home Hero.png"
+import logo from "../assets/Home Hero.png";
 import { ImBoxAdd } from "react-icons/im";
 import { use, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const NavBar = () => {
   const { user, signOutUser } = use(AuthContext);
 
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
-    const html = document.querySelector('html')
-     html.setAttribute("data-theme", theme)
-     localStorage.setItem("theme", theme)
-  }, [theme])
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
+  const handleSignOut = () => {
+    signOutUser().then(() => {
+      toast.success("You are Logged Out").catch((error) => {
+        console.log(error);
+      });
+    });
+  };
 
   const handleTheme = (checked) => {
-    setTheme(checked ? "dark": "light")
-  }
+    setTheme(checked ? "dark" : "light");
+  };
   return (
     <div className="navbar py-0 min-h-0 z-1 shadow-sm rounded-full glass-card max-w-7xl">
       <div className="navbar-start">
@@ -61,8 +69,10 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-        <Link to={"/"} className="flex items-center gap-1 text-xl font-bold"> <img className="size-20 rounded-full" src={logo} alt="" />
-           HomeHero
+        <Link to={"/"} className="flex items-center gap-1 text-xl font-bold">
+          {" "}
+          <img className="size-20 rounded-full" src={logo} alt="" />
+          HomeHero
         </Link>
       </div>
       <div className="navbar-center hidden md:flex">
@@ -74,16 +84,14 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/all-services"}>
-              All Services
-            </NavLink>
+            <NavLink to={"/all-services"}>All Services</NavLink>
           </li>
           <li>
             <NavLink to={"/add-service"}>
-             <ImBoxAdd /> Add Service
+              <ImBoxAdd /> Add Service
             </NavLink>
           </li>
-{/* 
+          {/* 
           <li>
             <NavLink to={"/profile"}>
               <FaUser /> Profile
@@ -103,7 +111,10 @@ const NavBar = () => {
                 <img
                   alt="Tailwind CSS Navbar component"
                   referrerPolicy="no-referrer"
-                  src={user.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
+                  src={
+                    user.photoURL ||
+                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  }
                 />
               </div>
             </div>
@@ -122,23 +133,20 @@ const NavBar = () => {
               </li>
 
               <li>
-                <Link to={"/my-services"}>
-                  My Services
-                </Link>
+                <Link to={"/my-services"}>My Services</Link>
               </li>
 
-              <li >
-                <Link to={"/my-bookings"}>
-                 My Bookings
-                </Link>
+              <li>
+                <Link to={"/my-bookings"}>My Bookings</Link>
               </li>
 
               <input
-           onChange={(e)=> handleTheme(e.target.checked)}
-           type="checkbox"
-           defaultChecked={localStorage.getItem('theme') === "dark"}
-           className="toggle"/>
-              
+                onChange={(e) => handleTheme(e.target.checked)}
+                type="checkbox"
+                defaultChecked={localStorage.getItem("theme") === "dark"}
+                className="toggle"
+              />
+
               <li>
                 <a>
                   {" "}
@@ -147,7 +155,7 @@ const NavBar = () => {
               </li>
               <li>
                 <button
-                  onClick={signOutUser}
+                  onClick={handleSignOut}
                   className="btn btn-xs text-left bg-linear-to-r from-pink-500 to-red-500 text-white"
                 >
                   <IoLogOut /> Logout

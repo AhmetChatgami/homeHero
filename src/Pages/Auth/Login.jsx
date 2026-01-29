@@ -1,11 +1,19 @@
-import { use } from "react";
+import { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { FaGoogle } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { FaEyeSlash, FaRegEye } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signInUser, signInWithGoogle } = use(AuthContext);
+  const [showPass, setShowPass] = useState(false);
+
+  const handleTogglePass = (event) => {
+    event.preventDefault();
+    setShowPass(!showPass);
+  };
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,12 +24,18 @@ const Login = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    console.log(email, password);
     signInUser(email, password)
       .then((result) => {
         console.log(result.user);
         event.target.reset();
         navigate(location.state || "/");
+        // toast.success("Login Successful");
+        Swal.fire({
+          title: "Welcome!",
+          text: "You are logged in!",
+          icon: "success",
+          duraction: 1000,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +60,6 @@ const Login = () => {
         <h1 className="text-3xl font-bold text-center">Login</h1>
         <form onSubmit={handleLogIn}>
           <fieldset className="fieldset">
-   
             <label className="label">Email</label>
             <input
               type="email"
@@ -55,13 +68,21 @@ const Login = () => {
               placeholder="Email"
             />
 
-            <label className="label">Password</label>
-            <input
-              type="password"
-              name="password"
-               className="input rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Password"
-            />
+            <div className="relative">
+              <label className="label">Password</label>
+              <input
+                type={showPass ? "text" : "password"}
+                name="password"
+                className="input rounded-full focus:border-0 focus:outline-gray-200"
+                placeholder="Password"
+              />
+              <button
+                onClick={handleTogglePass}
+                className="btn-md absolute top-8 right-7"
+              >
+                {showPass ? <FaEyeSlash /> : <FaRegEye />}
+              </button>
+            </div>
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
@@ -79,11 +100,12 @@ const Login = () => {
           Login with Google
         </button>
         <p className="text-center">
-          New to our website? Please  <Link
+          New to our website? Please{" "}
+          <Link
             className="text-blue-500 hover:text-blue-800"
             to="/auth/register"
           >
-             Register
+            Register
           </Link>
         </p>
       </div>
