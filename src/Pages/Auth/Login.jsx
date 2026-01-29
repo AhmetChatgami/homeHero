@@ -2,6 +2,7 @@ import { use } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { FaGoogle } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { signInUser, signInWithGoogle } = use(AuthContext);
@@ -24,13 +25,14 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Invalid email or password");
       });
   };
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
-        console.log(result.user);
+        toast.error(result.user);
         navigate(location?.state || "/");
       })
       .catch((error) => {

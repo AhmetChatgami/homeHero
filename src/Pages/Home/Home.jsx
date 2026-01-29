@@ -12,7 +12,7 @@ const Home = () => {
         Our Latest Services
       </div>
 
-      <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 p-4 mt-10">
         {data.map((service) => (
           <ServiceCard key={service._id} service={service} />
         ))}

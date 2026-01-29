@@ -55,7 +55,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/all-models"}>
+              <NavLink to={"/all-services"}>
                 <IoLogoModelS /> All Services
               </NavLink>
             </li>
